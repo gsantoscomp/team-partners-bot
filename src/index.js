@@ -2,6 +2,7 @@ import teamsInformation from "./teamsInformation.js";
 import puppeteer from "puppeteer";
 import randomUserAgent from "random-useragent";
 
+const browser = await puppeteer.launch();
 const DEFAULT_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36';
 
 const teamsByPartners = await Promise.all(
@@ -9,7 +10,6 @@ const teamsByPartners = await Promise.all(
         const userAgent = randomUserAgent.getRandom();
         const UA = userAgent || DEFAULT_USER_AGENT;
 
-        const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
         await page.setUserAgent(UA);
@@ -35,13 +35,16 @@ const teamsByPartners = await Promise.all(
             amountPartners = await partners.evaluate(el => el.textContent)
         }
 
-        await browser.close();
+        await page.close();
 
         return {
             team: team.name,
             partners: amountPartners.replaceAll('.', '').trim()
         };
+
     })
 );
+
+await browser.close();
 
 console.log(teamsByPartners);
