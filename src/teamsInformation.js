@@ -21,6 +21,12 @@ export default [
         "classToFind": "#wrapper > section > div > div.row.text-center.countTo > div:nth-child(1) > span > strong"
     },
     {
+        "name": "flamengo",
+        "linkPartnersInformation": "https://sociojaconero.juventude.com.br/",
+        "hasApiCall": true,
+        "apiLink": "https://api.mengo.com.br/public/counter"
+    },
+    {
         "name": "fortaleza",
         "linkPartnersInformation": "https://sociofortaleza.com.br/",
         "classToFind": ".main-somos > strong"
